@@ -1,4 +1,4 @@
-.loading-page{
+/* .loading-page{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,4 +21,17 @@
     100%{
         transform: rotate(360deg);
     }
+} */
+
+.loading-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+}
+
+.loader-svg {
+    width: 100px; /* Adjust size as needed */
+    height: 100px;
 }
