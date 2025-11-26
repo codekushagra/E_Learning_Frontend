@@ -10,13 +10,9 @@ import Loading from '../../components/loading/Loading';
 
 const CourseDescription = ({user}) => {
     const navigate = useNavigate();
-
-    const params = useParams(); //params get the id
-
+    const params = useParams(); 
     const [loading,setLoading] = useState(false)
-
     const {fetchUser} = UserData()
-
     const {fetchCourse, course, fetchCourses, fetchMyCourse } = CourseData()
 
     useEffect(()=>{
@@ -33,12 +29,12 @@ const CourseDescription = ({user}) => {
         });
         
         const options = {
-            "key": "rzp_test_XHcJLwEnBXfCLZ", // Enter the Key ID generated from the Dashboard
-            "amount": order.id, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "key": "rzp_test_XHcJLwEnBXfCLZ", 
+            "amount": order.id, 
             "currency": "INR",
-            "name": "Smart Learning", //your business name
+            "name": "Smart Learning", 
             "description": "Test Transaction",
-            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "order_id": order.id, 
 
             handler:async function (response){
                 const {razorpay_order_id, razorpay_payment_id, razorpay_signature} = response;
@@ -67,42 +63,41 @@ const CourseDescription = ({user}) => {
                 }
             },
             theme:{
-                color: "#00b4d8",
+                color: "#4f46e5",
             },
 
         };
         const razorpay = new window.Razorpay(options);
-
         razorpay.open();
     };
     
-
-
   return (
     <>
     {
         loading ? <Loading /> : <>
         {course && <div className='course-description'>
-            <div className='course-header'>
-                <img src={`${server}/${course.image}`} alt="" className='course-image' />
-                <div className='course-info'>
-                    <h1>{course.title}</h1>
-                    <p>Instructor - {course.createdBy}</p>
-                    <p>Duration - {course.duration} weeks</p>
-    
+            <div className="container">
+                <div className='course-header'>
+                    <div className="course-image-container">
+                        <img src={course.image?.startsWith('http') ? course.image : `${server}/${course.image}`} alt="" className='course-image' />
+                    </div>
+                    <div className='course-info'>
+                        <h1>{course.title}</h1>
+                        <p className="instructor">Instructor: {course.createdBy}</p>
+                        <p className="duration">Duration: {course.duration} weeks</p>
+                        <p className="price">Price: ₹{course.price}</p>
+                        <p className="description">{course.description}</p>
+                        
+                        {
+                            user && user.subscription.includes(course._id) ? ( 
+                                <button onClick={()=>navigate(`/course/study/${course._id}`)} className='common-btn study-btn'>Study Now</button> 
+                            ) : (
+                                <button onClick={checkoutHandler} className='common-btn enroll-btn'>Enroll Now</button>
+                            )
+                        }
+                    </div>
                 </div>
-                
             </div>
-            <p>{course.description}</p>
-            <p>Let's get started with course At  ₹{course.price}</p>
-    
-                {
-                    user && user.subscription.includes(course._id) ? ( <button onClick={()=>navigate(`/course/study/${course._id}`)} className='common-btn'>Study</button> ) : (
-                        <button onClick={checkoutHandler} className='common-btn'>Enroll Now</button>
-                    )
-                }
-    
-    
         </div> }
         </>
     }

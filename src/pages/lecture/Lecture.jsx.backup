@@ -205,33 +205,6 @@ const Lecture = ({ user }) => {
                       required
                     />
 
-                    <input
-                      type="file"
-                      placeholder="choose video"
-                      onChange={changeVideoHandler}
-                      required
-                    />
-
-                    {videoPrev && (
-                      <video
-                        src={videoPrev}
-                        alt=""
-                        width={300}
-                        controls
-                      ></video>
-                    )}
-
-                    <button
-                      disabled={btnLoading}
-                      type="submit"
-                      className="common-btn"
-                    >
-                      {btnLoading ? "Please Wait..." : "Add"}
-                    </button>
-                  </form>
-                </div>
-              )}
-
               {lectures && lectures.length > 0 ? (
                 lectures.map((e, i) => (
                   <div key={i} className={`lecture-item-container ${lecture._id === e._id ? "active-lecture" : ""}`}>
@@ -266,26 +239,6 @@ const Lecture = ({ user }) => {
 
           <div className="lecture-content">
             {lecLoading ? (
-              <Loading />
-            ) : (
-              <>
-                {lecture.video ? (
-                  <div className="video-container">
-                    <video
-                      src={lecture.video?.startsWith('http') ? lecture.video : `${server}/${lecture.video}`}
-                      width={"100%"}
-                      controls
-                      controlsList="nodownload noremoteplayback"
-                      disablePictureInPicture
-                      disableRemotePlayback
-                      autoPlay
-                      onEnded={() => addProgress(lecture._id)}
-                    ></video>
-                    <div className="lecture-details">
-                        <h1>{lecture.title}</h1>
-                        <h3>{lecture.description}</h3>
-                    </div>
-                  </div>
                 ) : (
                   <div className="select-lecture-msg">
                     <h1>Please Select a Lecture to Start Learning</h1>

@@ -1,59 +1,67 @@
-/* Add a wrapper for responsive tables */
 .users {
-    padding: 20px;
-    overflow-x: auto; /* Make sure content can scroll horizontally on small screens */
+  padding: 20px;
+}
+
+.users h1 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.MuiPaper-root {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.MuiTableHead-root .MuiTableCell-root {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+}
+
+.MuiTableBody-root .MuiTableRow-root:hover {
+  background-color: #f1f5f9 !important;
+}
+
+.MuiButton-root {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  border-radius: var(--radius) !important;
+  padding: 6px 16px !important;
+  transition: background-color 0.2s !important;
+}
+
+.MuiButton-root:hover {
+  background-color: var(--primary-hover) !important;
+}
+
+@media (max-width: 768px) {
+  .MuiTableCell-root {
+    font-size: 12px !important;
+    padding: 8px !important;
   }
-  
-  /* Table styling */
-  .MuiPaper-root {
-    width: 100%;
-    overflow-x: auto;
+
+  .MuiButton-root {
+    font-size: 12px !important;
+    padding: 6px 12px !important;
   }
-  
-  /* For smaller screens, adjust the font size and padding */
-  @media (max-width: 768px) {
-    .MuiTableCell-root {
-      font-size: 12px;
-      padding: 8px;
-    }
-  
-    .MuiTableHead-root {
-      font-size: 14px;
-    }
-  
-    /* Stack columns for small screens */
-    .MuiTable-root {
-      display: block;
-      overflow-x: auto;
-    }
-  
-    /* Make button smaller */
-    .MuiButton-root {
-      font-size: 12px;
-      padding: 6px 12px;
-    }
+}
+
+@media (max-width: 480px) {
+  .MuiTableCell-root {
+    font-size: 10px !important;
+    padding: 6px !important;
   }
-  
-  @media (max-width: 480px) {
-    .MuiTableCell-root {
-      font-size: 10px;
-      padding: 6px;
-    }
-  
-    .MuiTableHead-root {
-      font-size: 12px;
-    }
-  
-    /* Stacked table structure */
-    .MuiTable-root {
-      display: block;
-      overflow-x: auto;
-    }
-  
-    /* Change the button to be smaller */
-    .MuiButton-root {
-      font-size: 10px;
-      padding: 4px 8px;
-    }
+
+  .MuiButton-root {
+    font-size: 10px !important;
+    padding: 4px 8px !important;
   }
-  
+}

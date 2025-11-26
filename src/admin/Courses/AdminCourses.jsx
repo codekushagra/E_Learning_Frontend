@@ -27,6 +27,7 @@ const AdminCourses = ({ user }) => {
   const [price, setPrice] = useState("");
   const [createdBy, setCreatedBy] = useState("");
   const [duration, setDuration] = useState("");
+  const [notesLink, setNotesLink] = useState("");
   const [image, setImage] = useState("");
   const [imagePrev, setImagePrev] = useState("");
   const [btnLoading, setBtnLoading] = useState(false);
@@ -57,6 +58,7 @@ const AdminCourses = ({ user }) => {
     myForm.append("price", price);
     myForm.append("createdBy", createdBy);
     myForm.append("duration", duration);
+    myForm.append("notesLink", notesLink);
     myForm.append("file", image);
 
     try {
@@ -73,6 +75,7 @@ const AdminCourses = ({ user }) => {
       setTitle("");
       setDescription("");
       setDuration("");
+      setNotesLink("");
       setImagePrev("");
       setCreatedBy("");
       setPrice("");
@@ -127,7 +130,7 @@ const AdminCourses = ({ user }) => {
                   required
                 />
 
-                <label htmlFor="text">CreatedBy</label>
+                <label htmlFor="text">Created By</label>
                 <input
                   type="text"
                   value={createdBy}
@@ -135,9 +138,11 @@ const AdminCourses = ({ user }) => {
                   required
                 />
 
+                <label htmlFor="category">Category</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
+                  required
                 >
                   <option value={""}>Select Category</option>
                   {categories.map((e) => (
@@ -147,7 +152,7 @@ const AdminCourses = ({ user }) => {
                   ))}
                 </select>
 
-                <label htmlFor="text">Duration</label>
+                <label htmlFor="text">Duration (weeks)</label>
                 <input
                   type="number"
                   value={duration}
@@ -155,6 +160,15 @@ const AdminCourses = ({ user }) => {
                   required
                 />
 
+                <label htmlFor="text">Notes Link (Google Drive)</label>
+                <input
+                  type="url"
+                  value={notesLink}
+                  onChange={(e) => setNotesLink(e.target.value)}
+                  placeholder="https://drive.google.com/..."
+                />
+
+                <label htmlFor="file">Course Image</label>
                 <input type="file" required onChange={changeImageHandler} />
                 {imagePrev && <img src={imagePrev} alt="" width={300} />}
 

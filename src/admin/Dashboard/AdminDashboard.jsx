@@ -9,8 +9,6 @@ const AdminDashboard = ({ user }) => {
   const navigate = useNavigate();
 
   if (user && user.role !== "admin") return navigate("/");
-   
-  
 
   const [stats, setStats] = useState([]);
 
@@ -21,7 +19,7 @@ const AdminDashboard = ({ user }) => {
           token: localStorage.getItem("token"),
         },
       });
-      setStats(data.stats); // Use the fetched data (optional)
+      setStats(data.stats);
     } catch (error) {
       console.error(error);
     }
@@ -32,26 +30,27 @@ const AdminDashboard = ({ user }) => {
   },[])
 
   return (
-    <div>
-      <Layout>
-        <div className="main-content">
-          <div className='box'>
-            <p>Total Courses</p>
+    <Layout>
+      <div className="admin-dashboard">
+        <h1>Dashboard Overview</h1>
+        <div className="stats-container">
+          <div className='stats-card'>
+            <h3>Total Courses</h3>
             <p>{stats.totalCoures}</p>
           </div>
 
-          <div className='box'>
-            <p>Total Lectures</p>
+          <div className='stats-card'>
+            <h3>Total Lectures</h3>
             <p>{stats.totalLectures}</p>
           </div>
 
-          <div className='box'>
-            <p>Total Users</p>
+          <div className='stats-card'>
+            <h3>Total Users</h3>
             <p>{stats.totalUsers}</p>
           </div>
         </div>
-      </Layout>
-    </div>
+      </div>
+    </Layout>
   );
 };
 

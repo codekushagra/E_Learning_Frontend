@@ -28,6 +28,10 @@ const Login = () => {
           <label htmlFor="password">Password</label>
           <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)} required />
 
+          <div className="forgot-password-link">
+            <Link to='/forgot-password'>Forgot Password?</Link>
+          </div>
+
           <button disabled={btnLoading} type='submit' className="common-btn">{btnLoading?"Please Wait...": "Login"}</button> 
         </form>
         <p>

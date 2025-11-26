@@ -5,11 +5,11 @@ const   Layout = ({children}) => {
   return (
     <div className='dashboard-admin'>
         <Sidebar/>
-        <div className="content">{children}</div>
+        <div className="main-content">{children}</div>
 
         
     </div>
   )
 }
 
- export default   Layout 
+ export default   Layout

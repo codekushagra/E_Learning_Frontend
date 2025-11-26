@@ -10,7 +10,6 @@ import { CourseData } from "../../context/CourseContext";
 const CourseCard = ({ course }) => {
   const navigate = useNavigate();
   const { user, isAuth } = UserData();
-
   const { fetchCourses } = CourseData();
 
   const deleteHandler = async (id) => {
@@ -21,7 +20,6 @@ const CourseCard = ({ course }) => {
             token: localStorage.getItem("token"),
           },
         });
-
         toast.success(data.message);
         fetchCourses();
       } catch (error) {
@@ -29,59 +27,64 @@ const CourseCard = ({ course }) => {
       }
     }
   };
+
   return (
     <div className="course-card">
-      <img src={`${server}/${course.image}`} alt="" className="course-image" />
-      <h3>{course.title}</h3>
-      <p>Instructor- {course.createdBy}</p>
-      <p>Duration- {course.duration} weeks</p>
-      <p>Price- ₹{course.price}</p>
-      {isAuth ? (
-        <>
-          {user && user.role !== "admin" ? (
+      <div className="course-image-wrapper">
+        <img src={course.image?.startsWith('http') ? course.image : `${server}/${course.image}`} alt="" className="course-image" />
+      </div>
+      <div className="course-content">
+        <h3>{course.title}</h3>
+        <p className="instructor">By {course.createdBy}</p>
+        <p className="duration">Duration: {course.duration} weeks</p>
+        <p className="price">₹{course.price}</p>
+        
+        <div className="course-actions">
+          {isAuth ? (
             <>
-              {user.subscription.includes(course._id) ? (
-                <button
-                  onClick={() => navigate(`/course/study/${course._id}`)}
-                  className="common-btn"
-                >
-                  Study
-                </button>
+              {user && user.role !== "admin" ? (
+                <>
+                  {user.subscription.includes(course._id) ? (
+                    <button
+                      onClick={() => navigate(`/course/study/${course._id}`)}
+                      className="common-btn study-btn"
+                    >
+                      Study Now
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => navigate(`/course/${course._id}`)}
+                      className="common-btn get-started-btn"
+                    >
+                      Get Started
+                    </button>
+                  )}
+                </>
               ) : (
                 <button
-                  onClick={() => navigate(`/course/${course._id}`)}
-                  className="common-btn"
+                  onClick={() => navigate(`/course/study/${course._id}`)}
+                  className="common-btn study-btn"
                 >
-                  Get Started
+                  Study Now
                 </button>
               )}
             </>
           ) : (
-            <button
-              onClick={() => navigate(`/course/study/${course._id}`)}
-              className="common-btn"
-            >
-              Study
+            <button onClick={() => navigate("/login")} className="common-btn get-started-btn">
+              Get Started
             </button>
           )}
-        </>
-      ) : (
-        <button onClick={() => navigate("/login")} className="common-btn">
-          Get Started
-        </button>
-      )}
 
-      <br />
-
-      {user && user.role === "admin" && (
-        <button
-          onClick={() => deleteHandler(course._id)}
-          className="common-btn"
-          style={{ background: "red" }}
-        >
-          Delete
-        </button>
-      )}
+          {user && user.role === "admin" && (
+            <button
+              onClick={() => deleteHandler(course._id)}
+              className="common-btn delete-btn"
+            >
+              Delete
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
