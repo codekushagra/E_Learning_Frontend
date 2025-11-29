@@ -63,6 +63,25 @@
   margin-bottom: 30px;
 }
 
+.test-mode-banner {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid #f59e0b;
+  border-radius: var(--radius);
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.test-mode-text {
+  font-size: 0.95rem;
+  color: #b45309;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+}
+
 .enroll-btn, .study-btn {
   padding: 1rem 2rem;
   font-size: 1.125rem;

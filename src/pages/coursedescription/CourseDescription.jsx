@@ -88,6 +88,14 @@ const CourseDescription = ({user}) => {
                         <p className="price">Price: ₹{course.price}</p>
                         <p className="description">{course.description}</p>
                         
+                        {/* Test Mode Payment Info */}
+                        <div className="test-mode-banner">
+                            <p className="test-mode-text">
+                                💳 <strong>Payment is in Test Mode</strong> - No money will be deducted. 
+                                You can still proceed to payment; it will automatically get completed!
+                            </p>
+                        </div>
+                        
                         {
                             user && user.subscription.includes(course._id) ? ( 
                                 <button onClick={()=>navigate(`/course/study/${course._id}`)} className='common-btn study-btn'>Study Now</button> 
