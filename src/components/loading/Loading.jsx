@@ -9,6 +9,10 @@ const Loading = () => {
         <div className="loader-circle"></div>
         <div className="loader-circle"></div>
         <div className="loader-text">Loading...</div>
+        <div className="loader-info">
+          <p>Backend deployed on Render free version</p>
+          <p>Will take ~50s to load, have patience 🙏</p>
+        </div>
       </div>
     </div>
   );
